@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel to JSON Converter</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> <!-- Include SheetJS Library -->
+    
+    <!-- Primary Meta Tags -->
+    <title>Excel to JSON Converter Online - Free & Simple Tool</title>
+    <meta name="title" content="Excel to JSON Converter Online - Free & Simple Tool">
+    <meta name="description" content="Convert Excel files to JSON format quickly and easily with our free online Excel to JSON converter. No installation required.">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anuragshahi9911.github.io/excel-to-json/">
+    <meta property="og:title" content="Excel to JSON Converter Online - Free & Simple Tool">
+    <meta property="og:description" content="Convert Excel files to JSON format quickly and easily with our free online Excel to JSON converter. No installation required.">
+    <meta property="og:image" content="https://anuragshahi9911.github.io/excel-to-json/excel%20to%20json.webp">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://anuragshahi9911.github.io/excel-to-json/">
+    <meta property="twitter:title" content="Excel to JSON Converter Online - Free & Simple Tool">
+    <meta property="twitter:description" content="Convert Excel files to JSON format quickly and easily with our free online Excel to JSON converter. No installation required.">
+    <meta property="twitter:image" content="https://anuragshahi9911.github.io/excel-to-json/excel%20to%20json.webp">
+
+    <!-- Search Engine Optimization Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Excel to JSON, Excel to JSON converter, Convert Excel to JSON, Online Excel to JSON tool, Excel to JSON free, Excel to JSON converter online">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Excel to JSON Converter Online",
+      "url": "https://anuragshahi9911.github.io/excel-to-json/",
+      "description": "Convert Excel files to JSON format quickly and easily with our free online Excel to JSON converter.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://anuragshahi9911.github.io/excel-to-json/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Styles and SheetJS library -->
     <style>
-        /* Reset some default browser styling */
         * {
             margin: 0;
             padding: 0;
@@ -37,7 +75,6 @@
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-           
         }
 
         .upload-box {
@@ -75,7 +112,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin: 20px 0;
+            margin-top: 20px;
         }
 
         .upload-btn:hover {
@@ -113,10 +150,11 @@
 <body>
 
     <div class="container">
-        <h1>Excel to JSON Converter</h1>
+        <h1>Excel to JSON Converter Online</h1>
+        <h2>Convert Your Excel Files to JSON Format for Free</h2>
 
         <div class="upload-box">
-            <label for="upload">Select an Excel file:</label>
+            <label for="upload">Select an Excel file (.xlsx or .xls):</label>
             <input type="file" id="upload" />
         </div>
 
@@ -126,10 +164,11 @@
         <pre class="output" id="json-output"></pre>
 
         <div class="footer">
-            Built with ❤️ by <a href="https://www.linkedin.com/in/anuragshahi9911/">Anurag Shahi</a>
+            Built with ❤️ by <a href="https://anuragshahi9911.github.io/excel-to-json/">Anurag Shahi</a>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> <!-- Include SheetJS Library -->
     <script>
         function handleFile() {
             const fileInput = document.getElementById('upload');
