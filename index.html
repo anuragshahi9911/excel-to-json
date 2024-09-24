@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to JSON Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> <!-- Include SheetJS Library -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Excel to JSON Converter</h1>
+    <input type="file" id="upload" />
+    <h3>JSON Output:</h3>
+    <pre id="json-output"></pre>
+
+    <script>
+        document.getElementById('upload').addEventListener('change', handleFile, false);
+
+        function handleFile(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                alert("Please select a file.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Assume the Excel file has data on the first sheet
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert worksheet to a 2D array
+                const sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                // Process the header row
+                const headers = sheetData[0];
+                const entityTypeIndex = headers.indexOf("entity_type (Business)");
+                const brandIdIndex = headers.indexOf("brand_id / brand_company_id (Business)");
+                const accountIdIndex = headers.indexOf("account_id (Ads)");
+
+                // Object to store the result
+                const result = {};
+
+                // Iterate over the data rows (starting from the second row)
+                for (let i = 1; i < sheetData.length; i++) {
+                    const row = sheetData[i];
+                    const accountId = row[accountIdIndex];
+                    const brandId = row[brandIdIndex];
+
+                    // Check if accountId and brandId are valid (not null, undefined, or empty strings)
+                    if (!accountId || !brandId) {
+                        continue; // Skip this row if invalid
+                    }
+
+                    // Initialize an array for the accountId if it doesn't exist yet
+                    if (!result[accountId]) {
+                        result[accountId] = [];
+                    }
+
+                    // Add the brandId to the array for the corresponding accountId
+                    result[accountId].push(brandId);
+                }
+
+                // Display the JSON output
+                document.getElementById('json-output').textContent = JSON.stringify(result, null, 2);
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+
+</body>
+</html>
